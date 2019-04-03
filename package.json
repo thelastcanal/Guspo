@@ -1,5 +1,5 @@
 {
-    "name": "guspo",
+    "name": "leeroy",
     "version": "1.0.0",
     "description": "A fast Hearthstone deck builder.",
     "main": "index.js",
@@ -9,14 +9,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/thelastcanal/Guspo.git"
+        "url": "git+https://github.com/thelastcanal/leeroy.git"
     },
     "author": "Sean Callinan",
     "license": "UNLICENSED",
     "bugs": {
-        "url": "https://github.com/thelastcanal/Guspo/issues"
+        "url": "https://github.com/thelastcanal/leeroy/issues"
     },
-    "homepage": "https://github.com/thelastcanal/Guspo#readme",
     "dependencies": {
         "express": "^4.16.4"
     },
