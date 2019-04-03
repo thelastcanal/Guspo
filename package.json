@@ -17,6 +17,7 @@
         "url": "https://github.com/thelastcanal/leeroy/issues"
     },
     "dependencies": {
+        "dotenv": "^7.0.0",
         "express": "^4.16.4"
     },
     "devDependencies": {
