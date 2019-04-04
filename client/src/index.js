@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import Cards from "./Cards.jsx";
 import * as serviceWorker from "./serviceWorker";
-import Cards from "./Cards";
 
 ReactDOM.render(<Cards />, document.getElementById("root"));
 
