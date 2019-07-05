@@ -13,7 +13,7 @@ if (result.error) {
 // console.log(result.parsed);
 
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, "client/public")));
+// app.use(express.static(path.join(__dirname, "client/public")));
 
 getPosts = async () => {
     try {
@@ -30,12 +30,11 @@ getPosts = async () => {
 app.get("/api/cards", async (req, res) => {
     let posts = await getPosts();
     res.json(posts.data);
-    console.log("Sent list of posts");
 });
 
 // Handles all other requests
 app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/client/public/index.html"));
+    res.send("Leeroy - A fast Hearthstone Deck-builder");
 });
 
 const port = 5000;

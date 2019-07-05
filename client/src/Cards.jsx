@@ -1,40 +1,32 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-class Cards extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            cards: []
-        };
-    }
-    componentDidMount() {
-        this.updateList();
-    }
-    updateList = () => {
+function Cards() {
+    const [cards, setCards] = useState([]);
+
+    const updateList = () => {
         fetch("/api/cards")
             .then(response => response.json())
-            .then(cards =>
-                this.setState({
-                    cards
-                })
-            );
+            .then(cards => setCards(cards));
     };
-    render() {
-        return (
-            <div>
-                {this.state.cards.map(card => (
-                    <img
-                        src={
-                            "https://art.hearthstonejson.com/v1/render/latest/enUS/256x/" +
-                            card.id +
-                            ".png"
-                        }
-                        alt=""
-                    />
-                ))}
-            </div>
-        );
-    }
+
+    useEffect(() => {
+        updateList();
+    }, []);
+
+    return (
+        <div>
+            {cards.map(card => (
+                <img
+                    src={
+                        "https://art.hearthstonejson.com/v1/render/latest/enUS/256x/" +
+                        card.id +
+                        ".png"
+                    }
+                    alt=""
+                />
+            ))}
+        </div>
+    );
 }
 
 export default Cards;
