@@ -22,24 +22,16 @@ class Cards extends Component {
     render() {
         return (
             <div>
-                <ul>
-                    {this.state.cards.map(card => (
-                        <li>
-                            <span>{card.name} </span>
-                            <a
-                                href={
-                                    "https://art.hearthstonejson.com/v1/render/latest/enUS/256x/" +
-                                    card.id +
-                                    ".png"
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                link
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+                {this.state.cards.map(card => (
+                    <img
+                        src={
+                            "https://art.hearthstonejson.com/v1/render/latest/enUS/256x/" +
+                            card.id +
+                            ".png"
+                        }
+                        alt=""
+                    />
+                ))}
             </div>
         );
     }
