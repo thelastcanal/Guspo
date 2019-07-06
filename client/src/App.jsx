@@ -1,79 +1,42 @@
 import React, { useState, useEffect } from "react";
 
-function Layout({ data }) {
-    return (
-        <div
-            style={{
-                display: "grid",
-                gridTemplateColumns: "75% 25%"
-            }}
-        >
-            <div>
-                <Filters filters={data} />
-                <Cards cards={data} />
-            </div>
-            <Deck />
-        </div>
-    );
-}
-
-function Filters() {
-    return (
-        <div>
-            <h1>filters</h1>
-        </div>
-    );
-}
-
-function Cards({ cards }) {
-    return (
-        <div
-            id="card"
-            style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(5, 1fr)",
-                gridGap: "1rem 1rem"
-            }}
-        >
-            {cards.map(card => (
-                <img
-                    style={{ width: "100%", marginBottom: "-20%" }}
-                    src={`https://art.hearthstonejson.com/v1/render/latest/enUS/256x/${
-                        card.id
-                    }.png`}
-                    alt=""
-                />
-            ))}
-        </div>
-    );
-}
-
-function Deck() {
-    return (
-        <div id="deck">
-            <div>
-                <h1>deck</h1>
-            </div>
-        </div>
-    );
-}
-
 function App() {
-    const [cards, setCards] = useState([]);
-
-    const updateList = () => {
-        fetch("/api/cards")
-            .then(response => response.json())
-            .then(cards => setCards(cards));
-    };
-
     useEffect(() => {
-        updateList();
+        const fetchRawCardData = async () => {
+            return await fetch("/api/cards").then(result => result.json());
+        };
+        const createFilterLists = async () => {
+            const cardData = await fetchRawCardData();
+
+            const keys = cardData.map(card => {
+                return Object.keys(card);
+            });
+
+            const uniqueKeys = new Set(keys.flat());
+
+            const filterLists = {};
+
+            uniqueKeys.forEach(key => {
+                filterLists[key] = [];
+            });
+
+            cardData.forEach(card => {
+                const entries = Object.entries(card);
+                entries.forEach(entry => {
+                    if (!filterLists[entry[0]].includes(entry[1])) {
+                        filterLists[entry[0]].push(entry[1]);
+                    }
+                });
+            });
+
+            console.log(filterLists);
+        };
+        createFilterLists();
     }, []);
 
     return (
         <div>
-            <Layout data={cards} />
+            <h1>my app</h1>
         </div>
     );
 }
